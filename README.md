@@ -1,6 +1,6 @@
 # Tech-blogger
 
-![Screenshot](./assets/track-my-workforce.PNG)
+![Screenshot](./assets/images/screenshot.PNG)
 
 ## User Story
 
@@ -62,11 +62,12 @@ To create a CMS-style blog site that the user can publish articles, blog posts, 
 
 ## Challenges
 
-- Lorem
+- When logging in, you have to put your username and password in twice in order to go to dashboard.
 
 ## Website
 
 - https://github.com/gadaell/Tech-blogger
+- https://tech-blogger13.herokuapp.com/
 
 ## Contact
 
