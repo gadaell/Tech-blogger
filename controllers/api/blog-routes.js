@@ -1,12 +1,11 @@
 const router = require("express").Router();
 const sequelize = require("../../config/connection");
-const { Comment, User, Blog } = require("../../models");
+const { Blog, User, Comment } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-//get all blogs
-
+// get all blogs
 router.get("/", (req, res) => {
-  console.log("===========================");
+  console.log("======================");
   Blog.findAll({
     attributes: ["id", "title", "content", "created_at"],
     include: [
@@ -40,7 +39,7 @@ router.get("/:id", (req, res) => {
     include: [
       {
         model: Comment,
-        attributes: ["id", "comment_text", "user_id", "blog_id", "created_at"],
+        attributes: ["id", "comment_text", "blog_id", "user_id", "created_at"],
         include: {
           model: User,
           attributes: ["username"],
@@ -54,7 +53,7 @@ router.get("/:id", (req, res) => {
   })
     .then((dbBlogData) => {
       if (!dbBlogData) {
-        res.status(404).json({ message: "No Blog Post found with this id" });
+        res.status(404).json({ message: "No blog found with this id" });
         return;
       }
       res.json(dbBlogData);
@@ -79,12 +78,25 @@ router.post("/", withAuth, (req, res) => {
     });
 });
 
-// Edit Blog routes
+router.put("/upvote", withAuth, (req, res) => {
+  // custom static method created in models/Post.js
+  Post.upvote(
+    { ...req.body, user_id: req.session.user_id },
+    { Vote, Comment, User }
+  )
+    .then((updatedVoteData) => res.json(updatedVoteData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+// routes to edit blogs
+
 router.put("/:id", withAuth, (req, res) => {
   Blog.update(
     {
       title: req.body.title,
-      content: req.body.content,
     },
     {
       where: {
@@ -105,10 +117,11 @@ router.put("/:id", withAuth, (req, res) => {
     });
 });
 
-//Delete Blog Routes
+// delete blogs
+
 router.delete("/:id", withAuth, (req, res) => {
   console.log("id", req.params.id);
-  Blog.destroy({
+  Post.destroy({
     where: {
       id: req.params.id,
     },

@@ -1,0 +1,163 @@
+:root {
+  --primary: #415f11;
+  --secondary: #028090;
+  --tertiary: #7f4590;
+  --accent: #46a84e;
+  --textcolor: #e4fde1;
+}
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: var(--textcolor);
+  background-color: var(--primary);
+}
+
+a {
+  text-decoration: none;
+  background-color: var(--tertiary);
+  font-weight: bold;
+  transition: color 0.1s;
+}
+
+a:hover {
+  color: var(--primary);
+}
+
+button {
+  background-color: var(--secondary);
+  border: 0;
+  padding: 1%;
+  color: var(--textcolor);
+  font-weight: bold;
+  transition: background-color 0.1s;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: var(--accent);
+}
+
+.blog-list {
+  margin: 0;
+  padding: 0;
+}
+
+textarea,
+input {
+  padding: 0.5%;
+  border-radius: 5px;
+  border: 1px solid var(--tertiary);
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+  border: 1px solid var(--secondary);
+}
+
+textarea {
+  min-width: 40%;
+  min-height: 100px;
+}
+
+form > div {
+  margin-bottom: 2%;
+}
+
+form label {
+  display: block;
+}
+
+.wrapper {
+  width: 100%;
+  min-height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: black;
+  border-bottom: 1px solid var(--tertiary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1%;
+}
+
+header h1 {
+  font-size: 6em;
+  color: var(--textcolor);
+}
+
+.card {
+  background-color: var(--tertiary);
+  color: var(--secondary);
+}
+
+main {
+  flex: 1;
+  padding: 2% 4%;
+}
+
+.blog {
+  margin-bottom: 2%;
+  line-height: 150%;
+}
+
+.blog {
+  font-style: italic;
+  font-size: 90%;
+  color: var(--textcolor);
+}
+
+.edit-link {
+  display: block;
+  margin: -1.5% 0 2% 0;
+}
+
+.comment-form {
+  margin-bottom: 5%;
+}
+
+.comment {
+  padding: 1%;
+  margin-bottom: 1%;
+}
+
+.comment:nth-child(odd) {
+  background-color: var(--secondary);
+}
+
+.comment .meta {
+  font-size: 90%;
+  margin-bottom: 0.5%;
+  opacity: 0.6;
+}
+
+.new-post-form input {
+  width: 300px;
+}
+
+.edit-post-form {
+  margin-bottom: 5%;
+}
+
+footer {
+  border-top: 1px solid var(--tertiary);
+  background-color: var(--secondary);
+  display: flex;
+  justify-content: center;
+  padding: 1%;
+  font-size: 110%;
+}

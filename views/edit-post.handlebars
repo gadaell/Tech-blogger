@@ -1,0 +1,38 @@
+<div class="container">
+    <article>
+        <h2>
+            Edit Blog
+        </h2>
+        <div class="mb-3">
+            <form class="edit-form">
+                <div class="card-title">
+                    <input name="blog-title" type="text" value="{{blog.title}}"/>
+                </div>
+                <div class="card-body">
+                    <textarea name="blog-content" cols="100" rows="10">
+                        {{blog.content}}
+                    </textarea>
+                </div>
+                <div>
+                    <a href="/blog/{{blog.id}}">{{blog.comments.length}} {{format_plural "comment" blog.comments.length}}</a>
+                </div>
+                <button class="btn" type="submit">Save Blog</button>
+                <button type="button" class="btn delete-blog">Delete Blog</button>
+            </form>
+        </div>
+    </article>
+    <div class="container">
+        <form class="comment-form">
+            <div>
+                <textarea name="comment-body" cols="100"></textarea>
+            </div>
+            <div>
+                <button class="btn" type="submit">Add Comment</button>
+            </div>
+        </form>
+    </div>
+</div>
+    {{> comments blog.comments}}
+<script src="/javascript/edit-blog.js"></script>
+<script src="/javascript/delete-blog.js"></script>
+<script src="/javascript/comment.js"></script>

@@ -2,16 +2,15 @@ const router = require("express").Router();
 const sequelize = require("../config/connection");
 const { Blog, User, Comment } = require("../models");
 
-// get all blogs for the homepage.
-
+// get all posts for homepage
 router.get("/", (req, res) => {
-  console.log("================");
+  console.log("======================");
   Blog.findAll({
     attributes: ["id", "title", "content", "created_at"],
     include: [
       {
         model: Comment,
-        attributes: ["id", "comment_text", "blog_id", "user_id", "created_at"],
+        attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
         include: {
           model: User,
           attributes: ["username"],
@@ -24,9 +23,10 @@ router.get("/", (req, res) => {
     ],
   })
     .then((dbBlogData) => {
-      const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
+      const posts = dbBlogData.map((post) => post.get({ plain: true }));
+
       res.render("homepage", {
-        blogs,
+        posts,
         loggedIn: req.session.loggedIn,
       });
     })
@@ -36,10 +36,9 @@ router.get("/", (req, res) => {
     });
 });
 
-// get single blog.
-
+// get single blog
 router.get("/blogs/:id", (req, res) => {
-  Blog.findOne({
+  Post.findOne({
     where: {
       id: req.params.id,
     },
@@ -61,14 +60,14 @@ router.get("/blogs/:id", (req, res) => {
   })
     .then((dbBlogData) => {
       if (!dbBlogData) {
-        res.status(404).json({ message: "No Blog found with this id" });
+        res.status(404).json({ message: "No blog found with this id" });
         return;
       }
 
-      const blog = dbBlogData.get({ plain: true });
+      const post = dbBlogData.get({ plain: true });
 
-      res.render("single-blog", {
-        blog,
+      res.render("single-post", {
+        post,
         loggedIn: req.session.loggedIn,
       });
     })

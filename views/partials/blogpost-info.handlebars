@@ -1,0 +1,19 @@
+<div class="container">
+
+
+<article class="blogCard">
+  <div class="title card-header">
+    <h3>{{title}}</h3>
+  </div>
+  <div class="cardBody">
+    <p>{{content}}</p>
+  </div>
+  <div class="text-muted">
+    The blog was posted by {{user.username}} on {{format_date created_at}}
+    |
+    <a href="/blogs/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+  </div>
+</article>
+
+
+</div>

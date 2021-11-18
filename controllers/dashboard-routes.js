@@ -3,10 +3,10 @@ const sequelize = require("../config/connection");
 const { Blog, User, Comment } = require("../models");
 const withAuth = require("../utils/auth");
 
-//get all blogs for dashboard.
+// get all posts for dashboard
 router.get("/", withAuth, (req, res) => {
   console.log(req.session);
-  console.log("==================");
+  console.log("======================");
   Blog.findAll({
     where: {
       user_id: req.session.user_id,
@@ -15,7 +15,7 @@ router.get("/", withAuth, (req, res) => {
     include: [
       {
         model: Comment,
-        attributes: ["id", "comment_text", "blog_id", "user_id"],
+        attributes: ["id", "comment_text", "blog_id", "user_id", "created_at"],
         include: {
           model: User,
           attributes: ["username"],
@@ -37,9 +37,8 @@ router.get("/", withAuth, (req, res) => {
     });
 });
 
-//edit routes
 router.get("/edit/:id", withAuth, (req, res) => {
-  Blog.findByPk(req.params.id, {
+  Post.findByPk(req.params.id, {
     attributes: ["id", "title", "content", "created_at"],
     include: [
       {
@@ -73,5 +72,4 @@ router.get("/edit/:id", withAuth, (req, res) => {
     });
 });
 
-//Module exports.
 module.exports = router;
